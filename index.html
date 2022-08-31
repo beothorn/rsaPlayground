@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p>Prime numbe P: <input id="P" type="text" /></p>
+    <p>Prime numbe Q: <input id="Q" type="text" /></p>
+    <p>P * Q = N: <span id="product"></span></p>
+    <p>Totient (P-1) * (Q-1): <span id="totient"></span></p>
+    <p>Public key E:</p>
+    <p><ul>
+        <li>Prime</li>
+        <li>E &lt; totient</li>
+        <li>totient MOD E != 0</li>
+    </ul></p>
+    <p><input id="public" type="text" /></p>
+    <p>Private key D:</p>
+    <p><input id="private" type="text" /></p>
+    <p>(D * E) MOD T = 1</p>
+    <p>(D * E) MOD T = <span id="demodt"></span></p>
+    <p>Message ^ E MOD N = Cipher text</p>
+    <textarea></textarea>
+    <p id="cipher"></p>
+    <p>Cipher text ^ D MOD N = Message</p>
+    <textarea></textarea>
+    <p id="message"></p>
+    <button id="check">Check</button>
+<script>
+    function id(idSel){ return document.getElementById(idSel); }
+    function num(idSel){ return parseInt(id(idSel).value); }
+    id("check").addEventListener("click", () => {
+        const p = num("P");
+        const q = num("Q");
+        const n = p * q;
+        const d = num("private");
+        const e = num("public");
+        const t = (p-1) * (q-1);
+        id("product").innerText = n;
+        id("totient").innerText = t;
+        id("demodt").innerText = (d * e) % t;
+
+    });
+</script>
+</body>
+</html>
